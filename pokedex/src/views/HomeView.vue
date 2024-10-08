@@ -1,9 +1,12 @@
 <script setup>
-import TheWelcome from '../components/TheWelcome.vue'
+console.log('HomeView')
 </script>
 
 <template>
-  <main>
-    <TheWelcome />
-  </main>
+  <div class="container">
+    <div class="row mt-2">
+      <div class="col mb-2">palco</div>
+      <div class="col mb-2">pokedex</div>
+    </div>
+  </div>
 </template>
