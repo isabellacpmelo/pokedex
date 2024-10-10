@@ -91,28 +91,57 @@ body {
 
 <style scoped>
 
+/* .v-enter-from {
+  opacity: 0;
+} */
+
+/* .v-enter-active {
+  transition: opacity 1s;
+} */
+
+/* .v-enter-to {
+  opacity: 1;
+} */
+
+/* .v-leave-from {
+  opacity: 1;
+} */
+
+/* .v-leave-active {
+  transition: opacity 0.5s;
+} */
+
+/* 
+.v-leave-to {
+  opacity: 0;
+} */
+
 .v-enter-from {
   opacity: 0;
+  transform: translateX(-150px);
 }
 
 .v-enter-active {
-  transition: opacity 1s;
+  transition: all 2s;
 }
 
 .v-enter-to {
   opacity: 1;
+  transform: translateX(0px);
 }
 
 .v-leave-from {
   opacity: 1;
+  transform: translateX(0px);
 }
 
 .v-leave-active {
-  transition: opacity 0.5s;
+  transition: all 2s;
 }
 
 .v-leave-to {
   opacity: 0;
+  transform: translateX(-150px);
 }
 
 .pokedex {
