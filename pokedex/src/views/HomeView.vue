@@ -9,7 +9,9 @@
 
           <div class="card-body bg-pokebola bg-normal">
             <div class="pokemon">
-              <img v-show="exibir" src="@/assets/imgs/pokemons/001.png">
+              <transition>
+                <img v-show="exibir" src="@/assets/imgs/pokemons/001.png">
+              </transition>
             </div>
           </div>
 
@@ -88,6 +90,31 @@ body {
 </style>
 
 <style scoped>
+
+.v-enter-from {
+  opacity: 0;
+}
+
+.v-enter-active {
+  transition: opacity 1s;
+}
+
+.v-enter-to {
+  opacity: 1;
+}
+
+.v-leave-from {
+  opacity: 1;
+}
+
+.v-leave-active {
+  transition: opacity 0.5s;
+}
+
+.v-leave-to {
+  opacity: 0;
+}
+
 .pokedex {
   padding: 20px;
   background-color: #ffffff;
