@@ -99,59 +99,7 @@ body {
 </style>
 
 <style scoped>
-
-.fade-enter-from {
-  opacity: 0;
-}
-
-.fade-enter-active {
-  transition: opacity 1s;
-}
-
-.fade-enter-to {
-  opacity: 1;
-}
-
-.fade-leave-from {
-  opacity: 1;
-}
-
-.fade-leave-active {
-  transition: opacity 0.5s;
-}
-
-
-.fade-leave-to {
-  opacity: 0;
-}
-
-.slide-enter-from {
-  opacity: 0;
-  transform: translateX(-150px);
-}
-
-.slide-enter-active {
-  transition: all 2s;
-}
-
-.slide-enter-to {
-  opacity: 1;
-  transform: translateX(0px);
-}
-
-.slide-leave-from {
-  opacity: 1;
-  transform: translateX(0px);
-}
-
-.slide-leave-active {
-  transition: all 2s;
-}
-
-.slide-leave-to {
-  opacity: 0;
-  transform: translateX(-150px);
-}
+@import '@/assets/css/animacoes.css';
 
 .pokedex {
   padding: 20px;
