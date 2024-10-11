@@ -9,7 +9,7 @@
 
           <div class="card-body bg-pokebola bg-normal">
             <div class="pokemon">
-              <transition name="slide">
+              <transition name="zoom">
                 <img v-show="exibir" src="@/assets/imgs/pokemons/001.png">
               </transition>
               
@@ -17,7 +17,7 @@
                 <transition name="fade">
                   <img v-show="exibir" src="@/assets/imgs/pokemons/003.png">
                 </transition>
-                <transition name="slide">
+                <transition name="fade">
                   <img v-show="exibir" src="@/assets/imgs/pokemons/002.png">
                 </transition>
               </div>
@@ -175,7 +175,7 @@ body {
 }
 
 .bg-pokebola {
-  background-image: url("~@/assets/imgs/pokebola.png");
+  background-image: url("@/assets/imgs/pokebola.png");
   background-repeat: no-repeat;
   background-position: bottom right;
 }
