@@ -12,13 +12,21 @@
               <!-- <transition name="pulo" :duration="{ enter: 2000, leave: 1000}">
                 <img v-show="exibir" src="@/assets/imgs/pokemons/001.png">
               </transition> -->
-              <transition 
+              <!-- <transition 
                 enter-from-class="entrada-estado-inicial"
                 enter-active-class="entrada-transicao"
                 enter-to-class="entrada-estado-final"
                 leave-from-class="saida-estado-inicial"
                 leave-active-class="saida-transicao"
                 leave-to-class="saida-estado-final"
+              >
+                <img v-show="exibir" src="@/assets/imgs/pokemons/001.png">
+              </transition> -->
+
+              <!-- Usando biblioteca animate.css -->
+              <transition 
+                enter-active-class="animate__animated animate__bounce"
+                leave-active-class="animate__animated animate__bounceOut"
               >
                 <img v-show="exibir" src="@/assets/imgs/pokemons/001.png">
               </transition>
