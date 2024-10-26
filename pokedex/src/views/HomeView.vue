@@ -25,30 +25,21 @@
 
               <!-- Usando biblioteca animate.css -->
               <transition 
-                @before-enter="antesDaEntrada"
-                @enter="duranteAEntrada"
-                @after-enter="aposAEntrada"
-                @enter-cancelled="quandoEntradaCancelada"
-
-                @before-leave="antesDaSaida"
-                @leave="duranteASaida"
-                @after-leave="aposASaida"
-                @leave-cancelled="quandoSaidaCancelada"
-
-                :duration="{ enter: 2000, leave: 1000 }"
+                @after-enter="showEvolutionsTransition"
+                @before-leave="hideEvolutionsTransition"
 
                 enter-active-class="animate__animated animate__bounce"
                 leave-active-class="animate__animated animate__bounceOut"
               >
-                <img v-show="exibir" src="@/assets/imgs/pokemons/001.png">
+                <img v-show="showPokemon" src="@/assets/imgs/pokemons/001.png">
               </transition>
               
               <div class="evolucoes">
                 <transition name="fade">
-                  <img v-show="exibir" src="@/assets/imgs/pokemons/003.png">
+                  <img v-show="showEvolutions" src="@/assets/imgs/pokemons/003.png">
                 </transition>
                 <transition name="fade">
-                  <img v-show="exibir" src="@/assets/imgs/pokemons/002.png">
+                  <img v-show="showEvolutions" src="@/assets/imgs/pokemons/002.png">
                 </transition>
               </div>
             </div>
@@ -95,7 +86,7 @@
           <div class="pokedex-catalogo">
 
             <!-- início listagem dinâmica -->
-            <div class="cartao-pokemon bg-grama" @click="exibir = !exibir">
+            <div class="cartao-pokemon bg-grama" @click="showPokemon = !showPokemon">
               <h1>1 Bulbasaur</h1>
               <span>grama</span>
               <div class="cartao-pokemon-img">
@@ -117,34 +108,15 @@
 export default {
   name: 'HomeView',
   data: () => ({
-    exibir: false,
+    showPokemon: false,
+    showEvolutions: false,
   }),
   methods: {
-    antesDaEntrada(el) {
-      console.log('Antes da entrada', el)
+    showEvolutionsTransition() {
+      this.showEvolutions = true
     },
-    // duranteAEntrada(el, done) // Indica a conclusão da transição (entrada)
-    duranteAEntrada(el) {
-      console.log('Durante a entrada', el)
-    },
-    aposAEntrada(el) {
-      console.log('Após a entrada', el)
-    },
-    quandoEntradaCancelada(el) {
-      console.log('Quando a entrada é cancelada', el)
-    },
-
-    antesDaSaida(el) {
-      console.log('Antes da saída', el)
-    },
-    duranteASaida(el) {
-      console.log('Durante a saída', el)
-    },
-    aposASaida(el) {
-      console.log('Após a saída', el)
-    },
-    quandoSaidaCancelada(el) {
-      console.log('Quando a saída é cancelada', el)
+    hideEvolutionsTransition() {
+      this.showEvolutions = false
     }
   }
 }
