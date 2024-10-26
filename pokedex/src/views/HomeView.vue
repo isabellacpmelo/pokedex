@@ -25,6 +25,18 @@
 
               <!-- Usando biblioteca animate.css -->
               <transition 
+                @before-enter="antesDaEntrada"
+                @enter="duranteAEntrada"
+                @after-enter="aposAEntrada"
+                @enter-cancelled="quandoEntradaCancelada"
+
+                @before-leave="antesDaSaida"
+                @leave="duranteASaida"
+                @after-leave="aposASaida"
+                @leave-cancelled="quandoSaidaCancelada"
+
+                :duration="{ enter: 2000, leave: 1000 }"
+
                 enter-active-class="animate__animated animate__bounce"
                 leave-active-class="animate__animated animate__bounceOut"
               >
@@ -107,6 +119,34 @@ export default {
   data: () => ({
     exibir: false,
   }),
+  methods: {
+    antesDaEntrada(el) {
+      console.log('Antes da entrada', el)
+    },
+    // duranteAEntrada(el, done) // Indica a conclusão da transição (entrada)
+    duranteAEntrada(el) {
+      console.log('Durante a entrada', el)
+    },
+    aposAEntrada(el) {
+      console.log('Após a entrada', el)
+    },
+    quandoEntradaCancelada(el) {
+      console.log('Quando a entrada é cancelada', el)
+    },
+
+    antesDaSaida(el) {
+      console.log('Antes da saída', el)
+    },
+    duranteASaida(el) {
+      console.log('Durante a saída', el)
+    },
+    aposASaida(el) {
+      console.log('Após a saída', el)
+    },
+    quandoSaidaCancelada(el) {
+      console.log('Quando a saída é cancelada', el)
+    }
+  }
 }
 </script>
 
