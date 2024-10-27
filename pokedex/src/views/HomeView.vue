@@ -31,15 +31,22 @@
                 enter-active-class="animate__animated animate__bounce"
                 leave-active-class="animate__animated animate__bounceOut"
               >
-                <img v-show="showPokemon" src="@/assets/imgs/pokemons/001.png">
+                <img
+                  v-show="showPokemon"
+                  :src="`/src/assets/imgs/pokemons/${chosenPokemon.imagem}`"
+                >
               </transition>
               
               <div class="evolucoes">
-                <transition name="fade">
-                  <img v-show="showEvolutions" src="@/assets/imgs/pokemons/003.png">
-                </transition>
-                <transition name="fade">
-                  <img v-show="showEvolutions" src="@/assets/imgs/pokemons/002.png">
+                <transition
+                  v-for="evolution in chosenPokemon.evolucoes"
+                  :key="evolution"
+                  name="fade"
+                >
+                  <img
+                    v-show="showEvolutions"
+                    :src="`/src/assets/imgs/pokemons/${evolution.toString().padStart(3, '0')}.png`"
+                  >
                 </transition>
               </div>
             </div>
@@ -91,7 +98,7 @@
               :key="index"
               class="cartao-pokemon"
               :class="`bg-${pokemon.tipo}`"
-              @click="showPokemon = !showPokemon"
+              @click="analyzePokemon(pokemon)"
             >
               <h1>{{ pokemon.id }} {{ pokemon.nome }}</h1>
               <span>{{ pokemon.tipo }}</span>
@@ -116,6 +123,7 @@ export default {
   data: () => ({
     showPokemon: false,
     showEvolutions: false,
+    chosenPokemon: {},
     pokemons: [
       { id: 1, nome: 'Bulbasaur', tipo: 'grama', imagem: '001.png', evolucoes: [2,3] },
       { id: 2, nome: 'Ivysaur', tipo: 'grama', imagem: '002.png', evolucoes: [3] },
@@ -143,7 +151,18 @@ export default {
     },
     hideEvolutionsTransition() {
       this.showEvolutions = false
-    }
+    },
+    analyzePokemon(pokemon) {
+      // Verificar se o pokemon atual é diferente do clicado
+      if(this.chosenPokemon.id != pokemon.id && this.showPokemon) {
+        setTimeout(() => {
+          this.analyzePokemon(pokemon)
+        }, 1000)
+      }
+      this.chosenPokemon = pokemon
+      this.showPokemon = !this.showPokemon
+      this.showEvolutions = !this.showEvolutions
+    },
   }
 }
 </script>
@@ -265,7 +284,6 @@ body {
   cursor: pointer;
   max-width: 100%;
   max-height: 100%;
-  float: right;
 }
 
 </style>
