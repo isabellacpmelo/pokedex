@@ -22,7 +22,7 @@
             "evolucoes": [3],
             "habilidades": ["Ataque fúria", "Esquivar"],
             "status": {
-                "forca": 30,
+                "forca": 80,
                 "agilidade": 40,
                 "ataque": 20,
                 "defesa": 25
