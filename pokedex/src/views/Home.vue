@@ -32,11 +32,11 @@
                 leave-active-class="animate__animated animate__bounceOut"
               >
                 <img
-                  v-show="showPokemon"
+                  v-if="showPokemon"
                   :src="`/src/assets/imgs/pokemons/${chosenPokemon.imagem}`"
                 >
               </transition>
-              
+
               <div class="evolucoes">
                 <transition
                   v-for="evolution in chosenPokemon.evolucoes"
@@ -44,7 +44,7 @@
                   name="fade"
                 >
                   <img
-                    v-show="showEvolutions"
+                    v-if="showEvolutions"
                     :src="`/src/assets/imgs/pokemons/${evolution.toString().padStart(3, '0')}.png`"
                   >
                 </transition>
@@ -55,37 +55,42 @@
           <div class="card-footer">
          
           <nav class="nav nav-pills nav-fill">
+            <!-- menu de navegação -->
             <router-link
-                class="nav-item nav-item text-white"
-                :to="{ path: '/sobre' }"
-                exact-active-class="active"
-              >
-                Sobre
-              </router-link>
-              <router-link
-                class="nav-item nav-item text-white"
-                :to="{ path: '/status' }"
-                exact-active-class="active"
-              >
-                Status
-              </router-link>
-              <router-link
-                class="nav-item nav-item text-white"
-                :to="{ path: '/habilidades' }"
-                exact-active-class="active"
-              >
-                Habilidades
-              </router-link>
+              class="nav-item nav-link text-white"
+              :to="{ path: '/sobre' }"
+              exact-active-class="active"
+            >
+              Sobre
+            </router-link>
+            <router-link
+              class="nav-item nav-link text-white"
+              :to="{ path: '/status' }"
+              exact-active-class="active"
+            >
+              Status
+            </router-link>
+            <router-link
+              class="nav-item nav-link text-white"
+              :to="{ path: '/habilidades' }"
+              exact-active-class="active"
+            >
+              Habilidades
+            </router-link>
           </nav>
 
           <div class="detalhes">
-            <!-- exibe dados de acordo com o menu de navegação -->       
-            <router-view v-slot="{ Component }" :pokemon="chosenPokemon">
+            <!-- exibe dados de acordo com o menu de navegação -->
+            <router-view
+              v-slot="{ Component }"
+              :pokemon="chosenPokemon"
+              @addSkill="addSkill"
+            >
               <transition
                 enter-active-class="animate__animated animate__zoomInDown"
               >
                 <component :is="Component" />
-              </transition> 
+              </transition>
             </router-view>
           </div>
 
@@ -121,10 +126,9 @@
 
             <!-- início listagem dinâmica -->
             <div
-              v-for="(pokemon, index) in pokemons"
-              :key="index"
-              class="cartao-pokemon"
-              :class="`bg-${pokemon.tipo}`"
+              v-for="pokemon in pokemons"
+              :key="pokemon.id"
+              :class="`cartao-pokemon bg-${pokemon.tipo}`"
               @click="analyzePokemon(pokemon)"
             >
               <h1>{{ pokemon.id }} {{ pokemon.nome }}</h1>
@@ -175,16 +179,31 @@ export default {
       this.showEvolutions = false
     },
     analyzePokemon(pokemon) {
-      // Verificar se o pokemon atual é diferente do clicado
+      let changePokemonAnalyzed = false
+      //se o pokémon atua é diferente do pokémon clicado
+      //se o atributo exibir é true
       if(this.chosenPokemon.id != pokemon.id && this.showPokemon) {
         setTimeout(() => {
           this.analyzePokemon(pokemon)
         }, 1000)
+
+        changePokemonAnalyzed = true
       }
       this.chosenPokemon = pokemon
       this.showPokemon = !this.showPokemon
       this.showEvolutions = !this.showEvolutions
+
+      //se a ação for de ocultar o Pokémon
+      //se a ação recursiva não for chamada
+      if(!this.showPokemon && !changePokemonAnalyzed) {
+        this.chosenPokemon = {}
+      }
     },
+    addSkill(skill) {
+      if(this.chosenPokemon.habilidades) {
+        this.chosenPokemon.habilidades.push(skill)
+      }
+    }
   }
 }
 </script>
@@ -272,7 +291,7 @@ body {
 }
 
 .bg-pokebola {
-  background-image: url("@/assets/imgs/pokebola.png");
+  background-image: url("~@/assets/imgs/pokebola.png");
   background-repeat: no-repeat;
   background-position: bottom right;
 }
@@ -302,6 +321,7 @@ body {
   right: 0px;
   height: 70px;
 }
+
 .evolucoes img {
   cursor: pointer;
   max-width: 100%;

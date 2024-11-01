@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div v-if="!pokemon?.status">
+        <div v-if="!pokemon.status">
             Selecione um Pokémon
         </div>
         <div v-else>
