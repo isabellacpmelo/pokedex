@@ -15,6 +15,7 @@
                             <button 
                                 type="button" 
                                 class="btn btn-danger btn-sm"
+                                @click="$emit('removeSkill', index)"
                             >
                                 x
                             </button>

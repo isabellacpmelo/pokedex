@@ -85,6 +85,7 @@
               v-slot="{ Component }"
               :pokemon="chosenPokemon"
               @addSkill="addSkill"
+              @removeSkill="removeSkill"
             >
               <transition
                 enter-active-class="animate__animated animate__zoomInDown"
@@ -202,6 +203,11 @@ export default {
     addSkill(skill) {
       if(this.chosenPokemon.habilidades) {
         this.chosenPokemon.habilidades.push(skill)
+      }
+    },
+    removeSkill(index) {
+      if(this.chosenPokemon.habilidades) {
+        this.chosenPokemon.habilidades.splice(index, 1)
       }
     }
   }
