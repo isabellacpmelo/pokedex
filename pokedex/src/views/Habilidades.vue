@@ -7,7 +7,7 @@
             <table class="table text-white">
                 <transition-group name="lista" tag="tbody">
                     <tr
-                        v-for="(habilidade, index ) in pokemon.habilidades"
+                        v-for="(habilidade, index ) in skillsOrdered"
                         :key="habilidade"
                         class="list-item"
                     >
@@ -46,10 +46,19 @@ export default {
     }),
     methods: {
         addSkill() {
-            this.$emit('addSkill', this.skill)
+            // const newSkill = this.skill.charAt(0)
+            const newSkill = this.skill.charAt(0).toUpperCase() + this.skill.substring(1)
+            this.$emit('addSkill', newSkill)
             this.skill = ''
         }
-    }
+    },
+    computed: {
+        skillsOrdered() {
+            let skills = this.pokemon.habilidades
+            
+            return skills.sort()
+        }
+  }
 }
 </script>
 
