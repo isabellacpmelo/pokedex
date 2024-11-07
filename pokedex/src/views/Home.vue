@@ -110,10 +110,11 @@
 
         <div class="row">
           <div class="col">
-            <select class="form-select">
-              <option>Id crescente</option>
-              <option>Id decrescrente</option>
-              <option>De A - Z</option>
+            <select class="form-select" v-model="ordenacao">
+              <option value="" disabled>Ordenar Pokémon</option>
+              <option value="1">Id crescente</option>
+              <option value="2">Id decrescrente</option>
+              <option value="3">De A - Z</option>
             </select>
           </div>
         
@@ -161,8 +162,52 @@ export default {
     showPokemon: false,
     showEvolutions: false,
     chosenPokemon: {},
-    pokemons: []
+    pokemons: [],
+    ordenacao: ''
   }),
+  watch: {
+    ordenacao(newValue) {
+      if (newValue == 1) { //ordenação por id crescente
+        this.pokemons.sort((next, current) => {
+          if (current.id < next.id) {
+            return 1
+          }
+          else if (current.id > next.id) {
+            return - 1
+          }
+          else {
+            return 0
+          }
+        })
+      }
+      if (newValue == 2) { //ordenação por id decrescente
+        this.pokemons.sort((next, current) => {
+          if (current.id < next.id) {
+            return -1
+          }
+          else if (current.id > next.id) {
+            return 1
+          }
+          else {
+            return 0
+          }
+        })
+      }
+      if (newValue == 3) { //ordenação alfabética A-Z
+        this.pokemons.sort((next, current) => {
+          if (current.nome < next.nome) {
+            return 1
+          }
+          else if (current.nome > next.nome) {
+            return - 1
+          }
+          else {
+            return 0
+          }
+        })
+      }
+    }
+  },
   created() {
     fetch('http://localhost:3000/pokemons')
       .then(response => {
