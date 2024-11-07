@@ -5,10 +5,11 @@
         </div>
         <div v-else>
             <table class="table text-white">
-                <tbody>
+                <transition-group name="lista" tag="tbody">
                     <tr
                         v-for="(habilidade, index ) in pokemon.habilidades"
-                        :key="index"
+                        :key="habilidade"
+                        class="list-item"
                     >
                         <td>{{ habilidade }}</td>
                         <td class="d-flex justify-content-end">
@@ -21,7 +22,7 @@
                             </button>
                         </td>
                     </tr>
-                </tbody>
+                </transition-group>
             </table>
             <input
                 v-model="skill"
@@ -55,5 +56,38 @@ export default {
 <style scoped>
 .table td {
     border: none;
+}
+
+.lista-enter-from {
+    opacity: 0;
+    transform: translateX(-150px);
+}
+
+.lista-enter-active {
+    transition: all 1s;
+}
+
+.lista-enter-to {
+    opacity: 1;
+    transform: translateX(0px);
+}
+
+.lista-leave-from {
+    opacity: 1;
+    transform: translateX(0px);
+}
+
+.lista-leave-active {
+    transition: all 1s;
+    position: absolute;
+}
+
+.lista-leave-to {
+    opacity: 0;
+    transform: translateX(150px);
+}
+
+.lista-move {
+    transition: all 1.5s;
 }
 </style>
