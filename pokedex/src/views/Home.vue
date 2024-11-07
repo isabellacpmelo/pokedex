@@ -115,6 +115,7 @@
               <option value="1">Id crescente</option>
               <option value="2">Id decrescrente</option>
               <option value="3">De A - Z</option>
+              <option value="4">De Z - A</option>
             </select>
           </div>
         
@@ -204,6 +205,15 @@ export default {
           else {
             return 0
           }
+        })
+      }
+      if (newValue == 4) {
+        this.pokemons.sort((next, current) => {
+          // let resultado1 = current.nome.localeCompare(next.nome) // -1 indica que a string de referência vem antes do parâmetro
+          // let resultado2 = next.nome.localeCompare(current.nome) // 1 indica que a string de referência vem depois do parâmetro
+          // 0 indica que os valores são iguais
+
+          return current.nome.localeCompare(next.nome)
         })
       }
     }
